@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.PrintWriter;git 
 
 public class HelloServlet extends HttpServlet {
 
@@ -16,7 +16,7 @@ public class HelloServlet extends HttpServlet {
     {
         // Very simple - just return some plain text
         PrintWriter writer = response.getWriter();
-        writer.print("Hello World!! 2");
+        writer.print("Hello World!!");
     }
 }
 
