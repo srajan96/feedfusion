@@ -1,5 +1,5 @@
 // Reflecting the directory structure where the file lives
-package org.example;
+package org.feedfusion;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
