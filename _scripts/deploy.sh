@@ -1,5 +1,8 @@
 #!/bin/bash
-ssh deploy@139.59.61.26<<EOF
+echo $TRAVISKEY|cat > key.pem
+cat key.pem
+
+ssh -i key.pem deploy@139.59.61.26<<EOF
 cd feedfusion
 git pull
 mvn package
