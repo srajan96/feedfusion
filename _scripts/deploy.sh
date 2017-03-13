@@ -1,8 +1,7 @@
 #!/bin/bash
-echo $TRAVISKEY|cat > key
-cat key
-chmod 600 key
-ssh -i key deploy@139.59.61.26<<EOF
+rm travis.enc
+chmod 600 travis
+ssh -i travis deploy@139.59.61.26
 cd feedfusion
 git pull
 mvn package

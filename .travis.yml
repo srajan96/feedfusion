@@ -3,6 +3,7 @@ install: true
 addons:
   ssh_known_hosts: 139.59.61.26
 after_success:
+- ls
 - chmod +x _scripts/deploy.sh
 - _scripts/deploy.sh
 before_install:
