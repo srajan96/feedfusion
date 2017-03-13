@@ -1,6 +1,6 @@
 #!/bin/bash
 which sshpass
-echo $SSHPASS
+cd /usr/bin
 sshpass -e deploy@139.59.61.26
 cd feedfusion
 git pull
