@@ -1,6 +1,5 @@
 language: java
-install:
-  - if ENV['TRAVIS'] then echo "skip" fi 
+install: true 
     
 addons:
   ssh_known_hosts: 139.59.61.26
