@@ -1,7 +1,9 @@
 language: java
-sudo: required
+
 install: echo "skip install"
+addons:
+  ssh_known_hosts: 139.59.61.26
 after_success:
-- mv tavis ~/.ssh/id_rsa
+- mv travis ~/.ssh/id_rsa
 - ssh deploy@139.59.61.26
 - bash deploy.sh
