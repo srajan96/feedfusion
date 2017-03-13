@@ -4,8 +4,6 @@ install: true
 addons:
   ssh_known_hosts: 139.59.61.26
 after_success:
-- chmod 600 travis
-- mv travis ~/.ssh/id_rsa
 - chmod +x _scripts/deploy.sh
 - _scripts/deploy.sh
 
