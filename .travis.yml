@@ -1,6 +1,3 @@
 language: java
-before_install:
-- openssl aes-256-cbc -K $encrypted_65abf4490a15_key -iv $encrypted_65abf4490a15_iv
-  -in travis.enc -out travis -d
 after_success:
 - bash deploy.sh
