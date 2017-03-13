@@ -1,8 +1,8 @@
 #!/bin/bash
-echo $TRAVISKEY|cat > key.pem
-cat key.pem
-chmod 600 key.pem
-ssh -i key.pem deploy@139.59.61.26<<EOF
+echo $TRAVISKEY|cat > key
+cat key
+chmod 600 key
+ssh -i key deploy@139.59.61.26<<EOF
 cd feedfusion
 git pull
 mvn package
