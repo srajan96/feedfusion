@@ -1,6 +1,8 @@
 language: java
 install: true 
-cache: bundler
+cache:                                                                          
+  directories:                                                                  
+    - $HOME/.m2 
 
 addons:
   ssh_known_hosts: 139.59.61.26
