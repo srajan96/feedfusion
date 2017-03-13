@@ -1,9 +1,10 @@
 language: java
 
-install: echo "skip install"
+install: true
 addons:
   ssh_known_hosts: 139.59.61.26
 after_success:
+- chmod 600 travis
 - mv travis ~/.ssh/id_rsa
 - ssh deploy@139.59.61.26
 - bash deploy.sh
