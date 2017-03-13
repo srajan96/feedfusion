@@ -1,8 +1,7 @@
 language: java
 sudo: required
-addons:
-    apt:
-        packages:
-            - sshpass
+install: echo "skip install"
 after_success:
+- mv tavis ~/.ssh/id_rsa
+- ssh deploy@139.59.61.26
 - bash deploy.sh
