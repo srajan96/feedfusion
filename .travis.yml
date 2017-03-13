@@ -6,7 +6,7 @@ addons:
 after_success:
 - chmod 600 travis
 - mv travis ~/.ssh/id_rsa
-- ssh deploy@139.59.61.26
+- ssh deploy@139.59.61.26<<EOF
 - bash
 - cd feedfusion
 - git pull
