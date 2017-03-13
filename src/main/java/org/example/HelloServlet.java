@@ -16,7 +16,7 @@ public class HelloServlet extends HttpServlet {
     {
         // Very simple - just return some plain text
         PrintWriter writer = response.getWriter();
-        writer.print("Srajan!Its finally done!!");
+        writer.print("Good to go now!");
     }
 }
 
