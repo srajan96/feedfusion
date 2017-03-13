@@ -9,4 +9,6 @@ after_success:
 - ssh deploy@139.59.61.26
 - cd feedfusion
 - git pull
+- echo "done"
+- exit
 
