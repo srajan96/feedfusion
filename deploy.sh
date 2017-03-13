@@ -1,4 +1,5 @@
 #!/bin/bash
+which sshpass
 echo $SSHPASS
 sshpass -e deploy@139.59.61.26
 cd feedfusion
