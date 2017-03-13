@@ -1,7 +1,7 @@
 #!/bin/bash
 rm travis.enc
 chmod 600 travis
-ssh -i travis deploy@139.59.61.26
+ssh -i travis deploy@139.59.61.26<<EOF
 cd feedfusion
 git pull
 mvn package
