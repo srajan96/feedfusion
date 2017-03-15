@@ -6,10 +6,21 @@ sohagApp.config(function($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix("!"); //Support for hasbangs url (SEO)
   */
   $routeProvider.
-  when('/',{
+  when('/dashboard',{
     templateUrl : 'templates/homepage.html',
     controller : 'HomeController as homectrl'
-  })
+  }).
+  when('/register',{
+    templateUrl : 'templates/register.html',
+    controller : 'RegisterController as regcntrl'
+  }).
+  when('/',{
+    templateUrl : 'templates/login.html',
+    controller : 'LoginController as logincntrl'
+  }).
+  otherwise({
+    redirectTo: '/'
+  }) 
 
 
 });

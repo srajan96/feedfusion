@@ -1,2 +1,2 @@
-var sohagServerUrl = "http://localhost:8080/WebApplication1/";
+var sohagServerUrl = "http://localhost:8080/";
 
