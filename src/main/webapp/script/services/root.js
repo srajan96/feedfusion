@@ -7,7 +7,7 @@ sohagApp.factory('SohagRootService', function ($http) {
     return {
 	
 	getHomePageData: function () {
-
+			
             var req = {
                 method: 'POST',
                 url: sohagServerUrl + "getHomePageData",
