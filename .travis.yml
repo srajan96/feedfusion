@@ -8,7 +8,10 @@ install:
 cache:                                                                          
   directories:                                                                  
     - $HOME/.m2 
-
+notifications:
+  email:
+    - sonisrajan96@gmail.com
+    - soni.suryansh11130@gmail.com
 addons:
   ssh_known_hosts: 139.59.64.249
 after_success:
