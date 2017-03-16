@@ -10,7 +10,7 @@ sohagApp.factory('SohagRootService', function ($http) {
 
             var req = {
                 method: 'POST',
-                url: sohagServerUrl + "feedfusion/getHomePageData",
+                url: sohagServerUrl + "getHomePageData",
                 headers: {
                     'Content-Type': "text/html"
                 },
