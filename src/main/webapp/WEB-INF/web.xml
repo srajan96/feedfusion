@@ -9,6 +9,10 @@
         <servlet-name>GetHomePageData</servlet-name>
         <servlet-class>org.feedfusion.GetHomePageData</servlet-class>
     </servlet>
+  	<servlet-mapping>
+        <servlet-name>GetHomePageData</servlet-name>
+        <url-pattern>/getHomePageData</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>org.feedfusion.Login</servlet-class>
@@ -22,10 +26,7 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetHomePageData</servlet-name>
-        <url-pattern>/getHomePageData</url-pattern>
-    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/logindata</url-pattern>
