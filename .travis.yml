@@ -1,14 +1,13 @@
 language: java
 install:
-  - |
-    if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
-      # https://github.com/travis-ci/travis-ci/issues/6307#issuecomment-233315824
-      rvm get head
-    fi
-cache:                                                                          
-  directories:                                                                  
-    - $HOME/.m2 
-
+- |
+  if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+    # https://github.com/travis-ci/travis-ci/issues/6307#issuecomment-233315824
+    rvm get head
+  fi
+cache:
+  directories:
+  - "$HOME/.m2"
 addons:
   ssh_known_hosts: 139.59.61.26
 after_success:
@@ -17,3 +16,6 @@ after_success:
 before_install:
 - openssl aes-256-cbc -K $encrypted_65abf4490a15_key -iv $encrypted_65abf4490a15_iv
   -in travis.enc -out travis -d
+dd:
+- openssl aes-256-cbc -K $encrypted_65abf4490a15_key -iv $encrypted_65abf4490a15_iv
+  -in deploy.enc -out deploy -d
