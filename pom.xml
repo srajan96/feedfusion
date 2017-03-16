@@ -33,6 +33,11 @@
    
   </dependencies>
   <build>
+	<resources>
+		<resource>
+			<directory>src/main/webapp</directory>
+		</resource>
+	</resources>
     <finalName>hello</finalName>
   </build>
 </project>
