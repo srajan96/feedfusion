@@ -9,7 +9,15 @@
         <servlet-name>GetHomePageData</servlet-name>
         <servlet-class>org.feedfusion.GetHomePageData</servlet-class>
     </servlet>
-  	<servlet-mapping>
+    <servlet>
+        <servlet-name>callbackServlet</servlet-name>
+        <servlet-class>org.feedfusion.twitter.callbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>twitterSignIn</servlet-name>
+        <servlet-class>org.feedfusion.twitter.twitterSignIn</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
     </servlet-mapping>
@@ -21,12 +29,10 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>org.feedfusion.Register</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/logindata</url-pattern>
@@ -34,5 +40,13 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/registerdata</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>callbackServlet</servlet-name>
+        <url-pattern>/twittercallbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>twitterSignIn</servlet-name>
+        <url-pattern>/twitterSignIn</url-pattern>
     </servlet-mapping>
 </web-app>
