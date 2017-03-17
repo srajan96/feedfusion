@@ -32,7 +32,8 @@ public class TwitterDAO {
 			DBConn.close(conn, ps, res);
 		} catch ( Exception e) {
 			DBConn.close(conn, ps, res);
-			throw new DBException("Excepion while accessing database");
+			 throw new DBException(e+"");
+			//throw new DBException("Excepion while accessing database");
 		}
 		return pojo;
 	}
@@ -61,7 +62,8 @@ public class TwitterDAO {
 			DBConn.close(conn, ps, res);
 		} catch (Exception e) {
 			DBConn.close(conn, ps, res);
-			throw new DBException("Excepion while accessing database");
+			 throw new DBException(e+"");
+			//throw new DBException("Excepion while accessing database");
 		}
 		return pojo;
 	}
@@ -79,7 +81,8 @@ public class TwitterDAO {
 			DBConn.close(conn, ps);
 		} catch ( Exception e) {
 			DBConn.close(conn, ps);
-			throw new DBException("Excepion while accessing database");
+			 throw new DBException(e+"");
+			//throw new DBException("Excepion while accessing database");
 		}
 	}
 	
