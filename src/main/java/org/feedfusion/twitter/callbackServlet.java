@@ -73,7 +73,10 @@ public class callbackServlet extends HttpServlet {
     throw new ServletException(e);
 }
 */
-response.sendRedirect("/feedfusion/dashboard");
+             StringBuffer  dashURL = request.getRequestURL();
+		    int index = dashURL.lastIndexOf("/");
+		    dashURL.replace(index, dashURL.length(), "").append("/dashboard");
+response.sendRedirect(dashURL);
 //request.getRequestDispatcher("/status.jsp").forward(request, response);
 
     }
