@@ -100,8 +100,9 @@ public class TwitterDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			DBConn.close(conn, ps);
-			throw new DBException("Excepion while accessing database");
+          throw new DBException(e);
+			//throw new DBException("Excepion while accessing database");
 		}
 	}
 
-}	
+}
