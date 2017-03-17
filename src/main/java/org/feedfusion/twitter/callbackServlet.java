@@ -73,7 +73,7 @@ public class callbackServlet extends HttpServlet {
     throw new ServletException(e);
 }
 */
-response.sendRedirect("/dashboard");
+//response.sendRedirect("/dashboard");
 //request.getRequestDispatcher("/status.jsp").forward(request, response);
 
     }
