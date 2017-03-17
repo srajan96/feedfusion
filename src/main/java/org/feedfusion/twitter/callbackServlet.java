@@ -66,7 +66,9 @@ public class callbackServlet extends HttpServlet {
 
     request.setAttribute("user", user);
 } catch (Exception e ) {
-    throw new ServletException(e);
+    PrintWriter out=response.getWriter();
+    out.println(e);
+    //throw new ServletException(e);
 }/* catch(DBException e){
     throw new ServletException(e);
 }
