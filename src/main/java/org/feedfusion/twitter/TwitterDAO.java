@@ -103,7 +103,7 @@ public class TwitterDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			DBConn.close(conn, ps);
-          throw new DBException(e+"");
+          throw new DBException(e+"-"+pojo.getTwitter_user_id()+"-"+pojo.getTwitter_screen_name());
 			//throw new DBException("Excepion while accessing database");
 		}
 	}
