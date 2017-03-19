@@ -23,7 +23,7 @@ public class TwitterDAO {
 				while (res.next()) {
 			       pojo = new UserPojo();
 	               pojo.setUser_id(res.getInt(1));
-	               pojo.setTwitter_user_id(res.getInt(2));
+	               pojo.setTwitter_user_id(res.getLong(2));
 	               pojo.setTwitter_screen_name(res.getString(3));
 	               pojo.setAccess_token(res.getString(4));
 	               pojo.setAccess_token_secret(res.getString(5));
