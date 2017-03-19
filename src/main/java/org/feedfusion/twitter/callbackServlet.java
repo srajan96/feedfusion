@@ -75,7 +75,7 @@ public class callbackServlet extends HttpServlet {
 */
              StringBuffer  dashURL = request.getRequestURL();
 		    int index = dashURL.lastIndexOf("/");
-		    dashURL.replace(index, dashURL.length(), "").append("/dashboard");
+		    dashURL.replace(index, dashURL.length(), "").append("/#/dashboard");
 response.sendRedirect(dashURL.toString());
 //request.getRequestDispatcher("/status.jsp").forward(request, response);
 
