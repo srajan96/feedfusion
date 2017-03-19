@@ -32,7 +32,7 @@ public class TwitterDAO {
 			DBConn.close(conn, ps, res);
 		} catch ( Exception e) {
 			DBConn.close(conn, ps, res);
-			 throw new DBException(e+"");
+			 throw new DBException(e+"--by selectUser");
 			//throw new DBException("Excepion while accessing database");
 		}
 		return pojo;
@@ -62,7 +62,7 @@ public class TwitterDAO {
 			DBConn.close(conn, ps, res);
 		} catch (Exception e) {
 			DBConn.close(conn, ps, res);
-			 throw new DBException(e+"");
+			 throw new DBException(e+"--by select twitter user");
 			//throw new DBException("Excepion while accessing database");
 		}
 		return pojo;
@@ -81,7 +81,7 @@ public class TwitterDAO {
 			DBConn.close(conn, ps);
 		} catch ( Exception e) {
 			DBConn.close(conn, ps);
-			 throw new DBException(e+"");
+			 throw new DBException(e+"-by updateaccesstoken");
 			//throw new DBException("Excepion while accessing database");
 		}
 	}
@@ -103,7 +103,7 @@ public class TwitterDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			DBConn.close(conn, ps);
-          throw new DBException(e+"-"+pojo.getTwitter_user_id()+"-"+pojo.getTwitter_screen_name());
+          throw new DBException(e+"-"+pojo.getTwitter_user_id()+"-"+pojo.getTwitter_screen_name()+"--by insertr row");
 			//throw new DBException("Excepion while accessing database");
 		}
 	}
