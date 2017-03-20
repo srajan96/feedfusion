@@ -39,15 +39,7 @@ public class GetHomePageData extends HttpServlet {
         try{
             /* TODO output your page here. You may use following sample code. */
             PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetHomePageData</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetHomePageData at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
             
             
             ConfigurationBuilder cb = new ConfigurationBuilder();
