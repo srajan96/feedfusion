@@ -60,6 +60,7 @@ public class GetHomePageData extends HttpServlet {
             out.println(status.getUser().getName() + ":" +     status.getText());
 
         }
+               twitter.updateStatus("Hello World!");
         catch(Exception e){
             
         }
