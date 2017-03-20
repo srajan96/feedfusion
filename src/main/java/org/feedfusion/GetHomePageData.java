@@ -58,9 +58,9 @@ public class GetHomePageData extends HttpServlet {
         out.println("Showing home timeline.");
         for (Status status : statuses) 
             out.println(status.getUser().getName() + ":" +     status.getText());
-
+		 twitter.updateStatus("Hello World!");
         }
-               twitter.updateStatus("Hello World!");
+               
         catch(Exception e){
             
         }
