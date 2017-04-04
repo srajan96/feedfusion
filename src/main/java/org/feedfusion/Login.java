@@ -23,9 +23,9 @@ import java.util.UUID;
  */
 public class Login extends HttpServlet {
 
-    final String dbPassword="Try123zxs";
-    final String dbName="fusion";
-    final String dbUser="root";
+    final String dbPassword=Setup.DB_PASSWORD;
+    final String dbName=Setup.DB_NAME;
+    final String dbUser=Setup.DB_USERNAME;
     final String dbPath="localhost:3306";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
