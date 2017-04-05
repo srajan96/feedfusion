@@ -25,6 +25,10 @@
         <servlet-name>FBStoreToken</servlet-name>
         <servlet-class>org.feedfusion.facebook.FBStoreToken</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetTimeline</servlet-name>
+        <servlet-class>org.feedfusion.twitter.GetTimeline</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
@@ -96,5 +100,9 @@
     <servlet-mapping>
         <servlet-name>FBStoreToken</servlet-name>
         <url-pattern>/facebook/storetoken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetTimeline</servlet-name>
+        <url-pattern>/twitter/getfeed</url-pattern>
     </servlet-mapping>
 </web-app>

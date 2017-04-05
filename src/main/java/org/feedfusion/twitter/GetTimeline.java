@@ -1,5 +1,11 @@
-package org.feedfusion.instagram;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.feedfusion.twitter;
 
+import org.feedfusion.Setup;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
-import org.feedfusion.Setup;
+import java.util.List;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 /**
  *
  * @author Srajan
  */
-public class INStoreToken extends HttpServlet {
+public class GetTimeline extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +43,57 @@ public class INStoreToken extends HttpServlet {
             Connection conn=Setup.getConnection();
             String username=request.getParameter("username");
             String session=request.getParameter("session");
-            String token=request.getParameter("token");
+         
             
             if(Setup.checkSession(username, session)){
-                 PreparedStatement pst=conn.prepareStatement("insert into ff_instagram(username,access_token) values('?','?'); ");
+                 PreparedStatement pst=conn.prepareStatement("select access_token,access_token_secret from ff_twitter where username= ? ;");
                  pst.setString(1,username);
-                 pst.setString(2,token);
-                 pst.executeUpdate();
-                 String op="{\"status\":true}";
+                 ResultSet rs= pst.executeQuery();
+                 String access_token = null,access_token_secret=null;
+                // System.out.println("okayt"); 
+                while(rs.next()){
+                    access_token =rs.getString("access_token");
+                    access_token_secret=rs.getString("access_token_secret");
+                }
+               // System.out.println(access_token+"---"+access_token_secret);
+                
+               ConfigurationBuilder cb = new ConfigurationBuilder();
+               cb.setDebugEnabled(true)
+              .setOAuthConsumerKey("Olwk4ncLNgYZcROLvP9oAFrgv")
+              .setOAuthConsumerSecret("eht2OHYflAV1Cu8GP9XA46zm7KbiivY35TytvJ91aMX67brKEF")
+              .setOAuthAccessToken(access_token)
+              .setOAuthAccessTokenSecret(access_token_secret);
+
+         
+
+                TwitterFactory tf = new TwitterFactory(cb.build());
+                Twitter twitter = tf.getInstance();
+
+                List<Status> statuses;
+                statuses= twitter.getHomeTimeline();
+                String tweet="";
+                int i=0;
+                //out.println("Showing home timeline.");
+                for (Status status : statuses) {
+                     i++;
+                    if(i==1)
+                        tweet+="{\""+i+"\":\""+status.getId()+"\"";
+                    else
+                        tweet+=",\""+i+"\":\""+status.getId()+"\"";
+                    //out.println(status.getUser().getName() + ":" +     status.getText());
+
+                }
+                if(i!=0){
+                    tweet+="}";
+                }
+                out.print(tweet);
+                
+                
             }
             else
                 out.println("\"illegal\"");
-            
+         
+          
         }catch(Exception e){
             System.out.println(e);
         }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import org.feedfusion.Setup;
+
 /**
  *
  * @author Srajan
@@ -39,7 +40,9 @@ public class FBStoreToken extends HttpServlet {
                  pst.setString(1,username);
                  pst.setString(2,token);
                  pst.executeUpdate();
-                 String op="{success:true}";
+                 
+                 String op="{\"success\":true}";
+                 out.println(op);
             }
             else
                 out.println("\"illegal\"");
