@@ -71,7 +71,8 @@ public class Register extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
              Class.forName("com.mysql.jdbc.Driver");
-             Connection conn=DriverManager.getConnection("jdbc:mysql://"+dbPath+"/"+dbName,dbUser,dbPassword);
+           Connection conn=Setup.getConnection();
+            // Connection conn=DriverManager.getConnection("jdbc:mysql://"+dbPath+"/"+dbName,dbUser,dbPassword);
              PreparedStatement updateemp =conn.prepareStatement("insert into users(username,password,name,email)values(?,sha1(?),?,?)"); 
              updateemp.setString(1,username);
              updateemp.setString(2,password);
@@ -82,7 +83,7 @@ public class Register extends HttpServlet {
              out.print(true);
         } 
         catch(Exception e){
-            out.print(false);
+            out.print(e);
            e.printStackTrace();
         }
         finally {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
