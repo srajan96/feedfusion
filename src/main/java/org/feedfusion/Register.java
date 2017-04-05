@@ -82,7 +82,7 @@ public class Register extends HttpServlet {
              out.print(true);
         } 
         catch(Exception e){
-            out.print(false);
+            out.print(e);
            e.printStackTrace();
         }
         finally {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
