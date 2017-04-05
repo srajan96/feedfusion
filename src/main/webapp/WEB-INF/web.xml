@@ -29,6 +29,10 @@
         <servlet-name>GetTimeline</servlet-name>
         <servlet-class>org.feedfusion.twitter.GetTimeline</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostUpdate</servlet-name>
+        <servlet-class>org.feedfusion.twitter.PostUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
@@ -104,5 +108,9 @@
     <servlet-mapping>
         <servlet-name>GetTimeline</servlet-name>
         <url-pattern>/twitter/getfeed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostUpdate</servlet-name>
+        <url-pattern>/twitter/postupdate</url-pattern>
     </servlet-mapping>
 </web-app>
