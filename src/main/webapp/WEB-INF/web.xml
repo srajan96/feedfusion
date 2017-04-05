@@ -17,6 +17,14 @@
         <servlet-name>changepass</servlet-name>
         <servlet-class>org.feedfusion.changepass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StoreToken</servlet-name>
+        <servlet-class>org.feedfusion.twitter.TWStoreToken</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FBStoreToken</servlet-name>
+        <servlet-class>org.feedfusion.facebook.FBStoreToken</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
@@ -80,5 +88,13 @@
     <servlet-mapping>
         <servlet-name>changepass</servlet-name>
         <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StoreToken</servlet-name>
+        <url-pattern>/twitter/storetoken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FBStoreToken</servlet-name>
+        <url-pattern>/facebook/storetoken</url-pattern>
     </servlet-mapping>
 </web-app>

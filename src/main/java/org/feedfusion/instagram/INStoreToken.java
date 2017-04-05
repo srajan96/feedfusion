@@ -1,29 +1,19 @@
-package org.feedfusion.twitter;
+package org.feedfusion.instagram;
 
-import org.feedfusion.*;
+import org.feedfusion.facebook.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import twitter4j.*;
-import twitter4j.auth.AccessToken;
-import twitter4j.StatusUpdate;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Level;
-import twitter4j.conf.ConfigurationBuilder;
-import okhttp3.*;
+import java.sql.*;
+import org.feedfusion.Setup;
 /**
  *
- * @author Pavilion
+ * @author Srajan
  */
-public class addTwitterAccount extends HttpServlet {
+public class INStoreToken extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +27,32 @@ public class addTwitterAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-          .setOAuthConsumerKey(Setup.CONSUMER_KEY)
-          .setOAuthConsumerSecret(Setup.CONSUMER_SECRET);
-        try{
+        PrintWriter out = response.getWriter();
+        try {
             /* TODO output your page here. You may use following sample code. */
+            Connection conn=Setup.getConnection();
+            String username=request.getParameter("username");
+            String session=request.getParameter("session");
+            String token=request.getParameter("token");
+            
+            if(Setup.checkSession(username, session)){
+                 PreparedStatement pst=conn.prepareStatement("insert into ff_instagram(username,access_token) values('?','?'); ");
+                 pst.setString(1,username);
+                 pst.setString(2,token);
+                 pst.executeUpdate();
+                 String op="{\"status\":true}";
+            }
+            else
+                out.println("\"illegal\"");
+            
         }catch(Exception e){
-        ;
+            System.out.println(e);
         }
-        
+        finally {
+            out.close();
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
