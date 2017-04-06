@@ -23,9 +23,7 @@ public class Setup {
   
   public static Connection conn=null;
   public static Connection getConnection(){
-      if(conn!=null)
-          return conn;
-      else{
+     
           try {
               Class.forName("com.mysql.jdbc.Driver");
               conn=DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
@@ -33,7 +31,7 @@ public class Setup {
           } catch (Exception e) {
               System.out.println(e);
           }
-      }
+      
       return conn;
       
   }
