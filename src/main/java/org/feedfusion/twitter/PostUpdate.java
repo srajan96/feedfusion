@@ -75,7 +75,7 @@ public class PostUpdate extends HttpServlet {
          
           
         }catch(Exception e){
-            out.println(true);
+            out.println(e);
             System.out.println(e);
         }
         finally {
