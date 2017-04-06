@@ -69,12 +69,13 @@ public class PostUpdate extends HttpServlet {
                TwitterFactory tf = new TwitterFactory(cb.build());
                Twitter twitter = tf.getInstance();
                twitter.updateStatus(status);
-               out.println("{\"success\":true}");
+               out.println("{\"success\":\"posted\"}");
             } else
                 out.println("\"illegal\"");
          
           
         }catch(Exception e){
+            out.println(true);
             System.out.println(e);
         }
         finally {
