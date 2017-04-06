@@ -75,7 +75,7 @@ public class PostUpdate extends HttpServlet {
          
           
         }catch(Exception e){
-            out.println(e);
+            out.println("{\"success\":\"140charerror\"}");
             System.out.println(e);
         }
         finally {

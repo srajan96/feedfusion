@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.feedfusion.Setup;
 /**
  *
@@ -33,13 +35,22 @@ public class TWStoreToken extends HttpServlet {
             String username=request.getParameter("username");
             String session=request.getParameter("session");
             String token=request.getParameter("token");
-            
+            String token_secret=request.getParameter("token_secret");
             if(Setup.checkSession(username, session)){
+                 PreparedStatement pst=conn.prepareStatement("insert into ff_twitter(username,access_token,access_token_secret) values(?,?,?); ");
+                 pst.setString(1,username);
+                 pst.setString(2,token);
+                 pst.setString(3,token_secret);
                  
+                 pst.executeUpdate();
+                 String op="{\"status\":true}";
             }
             else
                 out.println("\"illegal\"");
             
+        } catch (SQLException ex)
+        {out.println(ex);
+        
         } finally {
             out.close();
         }
