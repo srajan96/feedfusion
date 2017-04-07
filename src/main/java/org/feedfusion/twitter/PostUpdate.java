@@ -73,8 +73,9 @@ public class PostUpdate extends HttpServlet {
             } else
                 out.println("\"illegal\"");
          
-          
+         
         }catch(Exception e){
+         out.println(e);
             out.println("{\"success\":\"140charerror\"}");
             System.out.println(e);
         }
