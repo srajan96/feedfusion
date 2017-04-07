@@ -45,6 +45,7 @@ public class TWStoreToken extends HttpServlet {
                  
                  pst.executeUpdate();
                  String op="{\"status\":true}";
+              	out.println(op);
             }
             else
                 out.println("\"illegal\"");
