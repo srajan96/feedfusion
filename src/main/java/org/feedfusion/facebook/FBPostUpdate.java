@@ -3,29 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.feedfusion.twitter;
+package org.feedfusion.facebook;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.feedfusion.Setup;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.Version;
+import com.restfb.types.FacebookType;
+import com.restfb.types.Post;
+import java.util.List;
+import java.sql.*;
+import org.feedfusion.Setup;
 /**
  *
  * @author Srajan
  */
-public class PostUpdate extends HttpServlet {
+public class FBPostUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,47 +37,39 @@ public class PostUpdate extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
        try {
             /* TODO output your page here. You may use following sample code. */
-            Connection conn=Setup.getConnection();
+            java.sql.Connection conn=(java.sql.Connection) Setup.getConnection();
             String username=request.getParameter("username");
             String session=request.getParameter("session");
             String status=request.getParameter("status");
             
             if(Setup.checkSession(username, session)){
-                 PreparedStatement pst=conn.prepareStatement("select access_token,access_token_secret from ff_twitter where username= ? ;");
+                 PreparedStatement pst=conn.prepareStatement("select access_token from ff_facebook where username= ? ;");
                  pst.setString(1,username);
                  ResultSet rs= pst.executeQuery();
-                 String access_token = null,access_token_secret=null;
+                 String access_token = null;
                 // System.out.println("okayt"); 
                 while(rs.next()){
                     access_token =rs.getString("access_token");
-                    access_token_secret=rs.getString("access_token_secret");
+                   
                 }
-               // System.out.println(access_token+"---"+access_token_secret);
-                
-               ConfigurationBuilder cb = new ConfigurationBuilder();
-               cb.setDebugEnabled(true)
-              .setOAuthConsumerKey("Olwk4ncLNgYZcROLvP9oAFrgv")
-              .setOAuthConsumerSecret("eht2OHYflAV1Cu8GP9XA46zm7KbiivY35TytvJ91aMX67brKEF")
-              .setOAuthAccessToken(access_token)
-              .setOAuthAccessTokenSecret(access_token_secret);
-                
-               TwitterFactory tf = new TwitterFactory(cb.build());
-               Twitter twitter = tf.getInstance();
-               twitter.updateStatus(status);
-               out.println("{\"success\":\"posted\"}");
+              FacebookClient facebookClient = new DefaultFacebookClient(access_token,"8bb6800994144f6b4438a49aadcf5e4e", Version.VERSION_2_8);
+                FacebookType publishMessageResponse =  facebookClient.publish("me/feed", FacebookType.class,Parameter.with("message", "RestFB test"));
+
+                       out.println("Published message ID: " + publishMessageResponse.getId());
+                       out.println("{\"success\":\"posted\"}");
             } else
                 out.println("\"illegal\"");
          
          
         }catch(Exception e){
          out.println(e);
-            out.println("{\"success\":\"140charerror\"}");
+            out.println("{\"success\":\"error\"}");
             System.out.println(e);
         }
         finally {

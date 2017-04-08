@@ -23,7 +23,7 @@ import twitter4j.conf.ConfigurationBuilder;
  *
  * @author Srajan
  */
-public class GetTimeline extends HttpServlet {
+public class TWGetTimeline extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
