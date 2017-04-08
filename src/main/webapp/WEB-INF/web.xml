@@ -103,7 +103,7 @@
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StoreToken</servlet-name>
+        <servlet-name>TWStoreToken</servlet-name>
         <url-pattern>/twitter/storetoken</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
