@@ -41,6 +41,7 @@ public class INStoreToken extends HttpServlet {
                  pst.setString(2,token);
                  pst.executeUpdate();
                  String op="{\"status\":true}";
+                 out.println(op);
             }
             else
                 out.println("\"illegal\"");
