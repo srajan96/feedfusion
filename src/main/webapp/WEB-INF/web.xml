@@ -45,6 +45,14 @@
         <servlet-name>GetAccountStatus</servlet-name>
         <servlet-class>org.feedfusion.GetAccountStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FBGetTimeline</servlet-name>
+        <servlet-class>org.feedfusion.facebook.FBGetTimeline</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FBGetTimeline2</servlet-name>
+        <servlet-class>org.feedfusion.facebook.FBGetTimeline2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
@@ -136,5 +144,13 @@
     <servlet-mapping>
         <servlet-name>GetAccountStatus</servlet-name>
         <url-pattern>/getuseraccountstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FBGetTimeline</servlet-name>
+        <url-pattern>/facebook/getfeed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FBGetTimeline2</servlet-name>
+        <url-pattern>/facebook/getfeed2</url-pattern>
     </servlet-mapping>
 </web-app>

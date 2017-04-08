@@ -60,13 +60,14 @@ public class GetAccountStatus extends HttpServlet {
                  if(rs2.next()) instagram="true";
                  if(rs3.next()) facebook="true";
                  String op="{";
+                 op+="\"status\":true,";
                  op+="\"facebook\":"+facebook+",";
                  op+="\"twitter\":"+twitter+",";
                  op+="\"instagram\":"+instagram+"}";
                  out.println(op);
             }
             else
-                out.println("{\"status\":false}");
+                out.println("{\"status\":\"Session Error\"}");
             
         }catch(Exception e){
             out.println(e);

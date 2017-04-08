@@ -5,28 +5,28 @@
  */
 package org.feedfusion.facebook;
 
+
+
+import facebook4j.FacebookFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import facebook4j.conf.ConfigurationBuilder;
+import facebook4j.ResponseList;
+import facebook4j.Facebook;
+import facebook4j.FacebookException;
+import facebook4j.Post;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Parameter;
-import com.restfb.Version;
-import com.restfb.types.FacebookType;
-import com.restfb.types.Post;
-import java.util.List;
-import java.sql.*;
-import org.feedfusion.Setup;
 /**
  *
  * @author Srajan
  */
-public class FBPostUpdate extends HttpServlet {
+public class FBGetTimeline2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +37,29 @@ public class FBPostUpdate extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       try {
-            /* TODO output your page here. You may use following sample code. */
-            java.sql.Connection conn=(java.sql.Connection) Setup.getConnection();
-            String username=request.getParameter("username");
-            String session=request.getParameter("session");
-            String status=request.getParameter("status");
+        
+        try {
+           ConfigurationBuilder cb = new ConfigurationBuilder();
+            cb.setDebugEnabled(true)
+              .setOAuthAppId("1978232082408711")
+              .setOAuthAppSecret("8bb6800994144f6b4438a49aadcf5e4e")
+              .setOAuthAccessToken("EAAcHMQyOJQcBAPGUHZB5o5kjlznqegOMWIXUFrCMgFqgDVYWyiOOiK74jvt2LQZA1uvGR3Hkjmos5nV6Iw5dJR79lGb86PnSjwren9Y4mGDbF8eMPQw28WyR5fgIEFxNc6CBOV1eRYk0f5jngzvXWOJwKTD4X3mUn2LwTj7FVn2UvbZBwE1lbdDYWKrSAEZD")
+              .setOAuthPermissions("email");
+            FacebookFactory ff = new FacebookFactory(cb.build());
+            Facebook facebook = (Facebook) ff.getInstance();
+            ResponseList<Post> feed = facebook.getHome();
+            for(Post p:feed){
+                System.out.println(p.getId());
+                out.println(p.getId());
+            }
             
-            if(Setup.checkSession(username, session)){
-                 PreparedStatement pst=conn.prepareStatement("select access_token from ff_facebook where username= ? ;");
-                 pst.setString(1,username);
-                 ResultSet rs= pst.executeQuery();
-                 String access_token = null;
-                // System.out.println("okayt"); 
-                while(rs.next()){
-                    access_token =rs.getString("access_token");
-                   
-                }
-                out.println(access_token);
-              FacebookClient facebookClient = new DefaultFacebookClient(access_token,"8bb6800994144f6b4438a49aadcf5e4e", Version.VERSION_2_8);
-                FacebookType publishMessageResponse =  facebookClient.publish("me/feed", FacebookType.class,Parameter.with("message", status));
-
-                       out.println("Published message ID: " + publishMessageResponse.getId());
-                       out.println("{\"success\":\"posted\"}");
-            } else
-                out.println("\"illegal\"");
-         
-         
-        }catch(Exception e){
-         out.println(e);
-            out.println("{\"success\":\"error\"}");
-            System.out.println(e);
-        }
-        finally {
+        } catch (FacebookException ex) {
+            Logger.getLogger(FBGetTimeline2.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             out.close();
         }
     }

@@ -84,6 +84,8 @@ public class Register extends HttpServlet {
         } 
         catch(Exception e){
             out.print(e);
+            String op="Choose another username";
+            out.println(op);
            e.printStackTrace();
         }
         finally {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

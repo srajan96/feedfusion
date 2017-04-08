@@ -19,15 +19,16 @@ import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.types.FacebookType;
 import com.restfb.types.Post;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
-import java.sql.*;
 import org.feedfusion.Setup;
 /**
  *
  * @author Srajan
  */
-public class FBPostUpdate extends HttpServlet {
-
+public class FBGetTimeline extends HttpServlet {
+     int last_sent=0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,17 +38,16 @@ public class FBPostUpdate extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       try {
-            /* TODO output your page here. You may use following sample code. */
             java.sql.Connection conn=(java.sql.Connection) Setup.getConnection();
             String username=request.getParameter("username");
             String session=request.getParameter("session");
-            String status=request.getParameter("status");
-            
+           
+        try {
+            /* TODO output your page here. You may use following sample code. */
             if(Setup.checkSession(username, session)){
                  PreparedStatement pst=conn.prepareStatement("select access_token from ff_facebook where username= ? ;");
                  pst.setString(1,username);
@@ -60,18 +60,36 @@ public class FBPostUpdate extends HttpServlet {
                 }
                 out.println(access_token);
               FacebookClient facebookClient = new DefaultFacebookClient(access_token,"8bb6800994144f6b4438a49aadcf5e4e", Version.VERSION_2_8);
-                FacebookType publishMessageResponse =  facebookClient.publish("me/feed", FacebookType.class,Parameter.with("message", status));
-
-                       out.println("Published message ID: " + publishMessageResponse.getId());
-                       out.println("{\"success\":\"posted\"}");
+              Connection<Post> result= facebookClient.fetchConnection("me/feed",Post.class,Parameter.with("limit", 25));
+                int i=0;
+                int seen=this.last_sent;
+               boolean over=false;
+                for(List<Post> page:result)
+                {
+                     System.out.println(i);
+                    for(Post aPost:page)
+                    {
+                       i++;
+                       if(i==20){
+                           over=true;
+                           break;
+                       }
+                      
+                      // System.out.println(aPost.getMessage());
+                       System.out.println("fb.com/"+ aPost.getId());
+                     // out.println(aPost.getMessage()+"");
+                      out.println("fb.com/"+ aPost.getId());
+                    
+                    }
+                    if(over)
+                        break;
+                  
+                }
+              
             } else
                 out.println("\"illegal\"");
-         
-         
         }catch(Exception e){
-         out.println(e);
-            out.println("{\"success\":\"error\"}");
-            System.out.println(e);
+            out.println(e);
         }
         finally {
             out.close();
