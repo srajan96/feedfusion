@@ -18,12 +18,16 @@
         <servlet-class>org.feedfusion.changepass</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StoreToken</servlet-name>
+        <servlet-name>TWStoreToken</servlet-name>
         <servlet-class>org.feedfusion.twitter.TWStoreToken</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FBStoreToken</servlet-name>
         <servlet-class>org.feedfusion.facebook.FBStoreToken</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>INStoreToken</servlet-name>
+        <servlet-class>org.feedfusion.instagram.INStoreToken</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetTimeline</servlet-name>
@@ -105,6 +109,10 @@
     <servlet-mapping>
         <servlet-name>FBStoreToken</servlet-name>
         <url-pattern>/facebook/storetoken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>INStoreToken</servlet-name>
+        <url-pattern>/instagram/storetoken</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetTimeline</servlet-name>
