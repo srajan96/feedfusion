@@ -48,6 +48,7 @@ public class FBStoreToken extends HttpServlet {
                 out.println("\"illegal\"");
             
         }catch(Exception e){
+            out.println(e);
             System.out.println(e);
         }
         finally {
