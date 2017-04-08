@@ -41,6 +41,10 @@
         <servlet-name>FBPostUpdate</servlet-name>
         <servlet-class>org.feedfusion.facebook.FBPostUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAccountStatus</servlet-name>
+        <servlet-class>org.feedfusion.GetAccountStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
         <url-pattern>/getHomePageData</url-pattern>
@@ -128,5 +132,9 @@
     <servlet-mapping>
         <servlet-name>FBPostUpdate</servlet-name>
         <url-pattern>/facebook/postupdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAccountStatus</servlet-name>
+        <url-pattern>/getuseraccountstatus</url-pattern>
     </servlet-mapping>
 </web-app>
