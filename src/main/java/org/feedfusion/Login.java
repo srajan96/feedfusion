@@ -80,7 +80,7 @@ public class Login extends HttpServlet {
             
             }
             else{
-              op="{login_correct:false}";
+              op="{\"login_correct\":false}";
             }
              out.print(op);
         }catch(Exception e){
