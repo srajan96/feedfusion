@@ -3,30 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.feedfusion.facebook;
+package org.feedfusion.instagram;
 
-
-
-import facebook4j.FacebookFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import facebook4j.conf.ConfigurationBuilder;
-import facebook4j.ResponseList;
-import facebook4j.Facebook;
-import facebook4j.FacebookException;
-import facebook4j.Post;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.feedfusion.Setup;
+import org.jinstagram.Instagram;
+import org.jinstagram.auth.model.Token;
+import org.jinstagram.entity.users.feed.MediaFeed;
+import org.jinstagram.entity.users.feed.MediaFeedData;
+
 
 /**
  *
  * @author Srajan
  */
-public class FBGetTimeline2 extends HttpServlet {
+public class INGetTimeline extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,24 +44,45 @@ public class FBGetTimeline2 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         try {
-           ConfigurationBuilder cb = new ConfigurationBuilder();
-            cb.setDebugEnabled(true)
-              .setOAuthAppId("1978232082408711")
-              .setOAuthAppSecret("8bb6800994144f6b4438a49aadcf5e4e")
-              .setOAuthAccessToken("EAAcHMQyOJQcBAPGUHZB5o5kjlznqegOMWIXUFrCMgFqgDVYWyiOOiK74jvt2LQZA1uvGR3Hkjmos5nV6Iw5dJR79lGb86PnSjwren9Y4mGDbF8eMPQw28WyR5fgIEFxNc6CBOV1eRYk0f5jngzvXWOJwKTD4X3mUn2LwTj7FVn2UvbZBwE1lbdDYWKrSAEZD")
-              .setOAuthPermissions("email");
-            FacebookFactory ff = new FacebookFactory(cb.build());
-            Facebook facebook = (Facebook) ff.getInstance();
-            ResponseList<Post> feed = facebook.getHome();
-            for(Post p:feed){
-                System.out.println(p.getId());
-                out.println(p.getId());
-            }
+            /* TODO output your page here. You may use following sample code. */
+             Connection conn=Setup.getConnection();
+            String username=request.getParameter("username");
+            String session=request.getParameter("session");
+         
             
-        } catch (FacebookException ex) {
-            Logger.getLogger(FBGetTimeline2.class.getName()).log(Level.SEVERE, null, ex);
+            if(Setup.checkSession(username, session)){
+                 PreparedStatement pst=conn.prepareStatement("select access_token from ff_instagram where username= ? ;");
+                 pst.setString(1,username);
+                 ResultSet rs= pst.executeQuery();
+                 String access_token = null;
+                // System.out.println("okayt"); 
+                while(rs.next()){
+                    access_token =rs.getString("access_token");
+                   
+                }
+                Token t=new Token(access_token,"a6fc64493c6f4e5fa6db58b34fd8071b");
+                Instagram instagram = new Instagram(t);
+                
+               // System.out.println(access_token+"---"+access_token_secret);
+                MediaFeed mediaFeed = instagram.getUserFeeds();
+        List<MediaFeedData> mediaFeeds = mediaFeed.getData();
+
+        for (MediaFeedData mediaData : mediaFeeds) {
+            System.out.println("id : " + mediaData.getId());
+            System.out.println("created time : " + mediaData.getCreatedTime());
+            System.out.println("link : " + mediaData.getLink());
+            System.out.println("tags : " + mediaData.getTags().toString());
+            System.out.println();
+        }
+             
+
+         
+            }
+            else
+                out.println("\"illegal\"");
+        } catch (SQLException ex) {
+            Logger.getLogger(INGetTimeline.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             out.close();
         }

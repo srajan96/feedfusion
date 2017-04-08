@@ -50,8 +50,8 @@
         <servlet-class>org.feedfusion.facebook.FBGetTimeline</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FBGetTimeline2</servlet-name>
-        <servlet-class>org.feedfusion.facebook.FBGetTimeline2</servlet-class>
+        <servlet-name>INGetTimeline</servlet-name>
+        <servlet-class>org.feedfusion.instagram.INGetTimeline</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetHomePageData</servlet-name>
@@ -150,7 +150,7 @@
         <url-pattern>/facebook/getfeed</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FBGetTimeline2</servlet-name>
-        <url-pattern>/facebook/getfeed2</url-pattern>
+        <servlet-name>INGetTimeline</servlet-name>
+        <url-pattern>/instagram/getfeed</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -58,11 +58,11 @@ public class FBPostUpdate extends HttpServlet {
                     access_token =rs.getString("access_token");
                    
                 }
-                out.println(access_token);
+                //out.println(access_token);
               FacebookClient facebookClient = new DefaultFacebookClient(access_token,"8bb6800994144f6b4438a49aadcf5e4e", Version.VERSION_2_8);
                 FacebookType publishMessageResponse =  facebookClient.publish("me/feed", FacebookType.class,Parameter.with("message", status));
 
-                       out.println("Published message ID: " + publishMessageResponse.getId());
+                  //     out.println("Published message ID: " + publishMessageResponse.getId());
                        out.println("{\"success\":\"posted\"}");
             } else
                 out.println("\"illegal\"");
