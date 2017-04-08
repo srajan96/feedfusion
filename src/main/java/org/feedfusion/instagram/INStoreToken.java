@@ -36,7 +36,7 @@ public class INStoreToken extends HttpServlet {
             String token=request.getParameter("token");
             
             if(Setup.checkSession(username, session)){
-                 PreparedStatement pst=conn.prepareStatement("insert into ff_instagram(username,access_token) values('?','?'); ");
+                 PreparedStatement pst=conn.prepareStatement("insert into ff_instagram(username,access_token) values(?,?); ");
                  pst.setString(1,username);
                  pst.setString(2,token);
                  pst.executeUpdate();
