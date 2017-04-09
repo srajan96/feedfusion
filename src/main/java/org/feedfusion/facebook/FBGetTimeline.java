@@ -80,7 +80,7 @@ public class FBGetTimeline extends HttpServlet {
                       
                      // out.println(aPost.getMessage()+"");
                      String postsurl[]=aPost.getId().split("_");
-                     if(i==1)
+                     if(i<21)
                           out.println("\""+i+"\":"+"\"https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]+"\",");
                       else
                       out.println("\""+i+"\":"+"\"https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]+"\"");
