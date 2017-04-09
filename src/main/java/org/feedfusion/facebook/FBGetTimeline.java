@@ -76,9 +76,11 @@ public class FBGetTimeline extends HttpServlet {
                        }
                       
                       // System.out.println(aPost.getMessage());
-                       System.out.println(aPost.getPermalinkUrl());
+                      
                      // out.println(aPost.getMessage()+"");
-                      out.println("fb.com/"+aPost.getId());
+                     String postsurl[]=aPost.getId().split("_");
+                      out.println("https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]);
+                      //out.println("https://www.facebook.com/1384760284900655/posts/1358098274233523/"+aPost.getId());
                     
                     }
                     if(over)
