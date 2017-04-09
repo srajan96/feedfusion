@@ -58,7 +58,8 @@ public class FBGetTimeline extends HttpServlet {
                     access_token =rs.getString("access_token");
                    
                 }
-                out.println(access_token);
+                //out.println(access_token);
+                out.println("{");
               FacebookClient facebookClient = new DefaultFacebookClient(access_token,"8bb6800994144f6b4438a49aadcf5e4e", Version.VERSION_2_8);
               Connection<Post> result= facebookClient.fetchConnection("me/feed",Post.class,Parameter.with("limit", 25));
                 int i=0;
@@ -70,7 +71,7 @@ public class FBGetTimeline extends HttpServlet {
                     for(Post aPost:page)
                     {
                        i++;
-                       if(i==20){
+                       if(i==21){
                            over=true;
                            break;
                        }
@@ -79,7 +80,11 @@ public class FBGetTimeline extends HttpServlet {
                       
                      // out.println(aPost.getMessage()+"");
                      String postsurl[]=aPost.getId().split("_");
-                      out.println("https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]);
+                     if(i==1)
+                          out.println("\""+i+"\":"+"\"https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]+"\",");
+                      else
+                      out.println("\""+i+"\":"+"\"https://www.facebook.com/"+postsurl[0]+"/posts/"+postsurl[1]+"\"");
+                      
                       //out.println("https://www.facebook.com/1384760284900655/posts/1358098274233523/"+aPost.getId());
                     
                     }
@@ -87,7 +92,7 @@ public class FBGetTimeline extends HttpServlet {
                         break;
                   
                 }
-              
+              out.println("}");
             } else
                 out.println("\"illegal\"");
         }catch(Exception e){
