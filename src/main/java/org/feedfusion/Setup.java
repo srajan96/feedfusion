@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Setup {
     
-  public static String DB_URL = "jdbc:mysql://139.59.64.249:3306/feedfusion";
+  public static String DB_URL = "jdbc:mysql://139.59.12.220:3306/feedfusion";
   public static String DB_NAME="feedfusion";
   public static String DB_USERNAME = "test";
   public static String DB_PASSWORD = "fujion";
