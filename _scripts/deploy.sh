@@ -1,7 +1,7 @@
 #!/bin/bash
 rm  -r deploy.enc
 chmod 600 deploy
-ssh -i deploy deploy@139.59.64.249<<EOF
+ssh -i deploy deploy@139.59.12.220<<EOF
 cd feedfusion
 git pull
 mvn package
